@@ -1,20 +1,22 @@
 import type { FormFieldProps } from "@/validation/multi_formSchema";
 import { Input } from "../ui/input";
 
-const FormField: React.FC<FormFieldProps> = ({
+const FormField: React.FC<FormFieldProps&{autoComplete?: string}> = ({
     type,
     placeholder,
     name,
     register,
     error,
     valueAsNumber,
+    autoComplete="on"
 }) => (
     <>
         <Input
-            className="w-full m-2 focus:ring focus:ring-blue-600 p-4" 
+            className="w-full m-2  p-6" 
             type={type}
             placeholder={placeholder}
             {...register(name, { valueAsNumber })}
+            autoComplete={autoComplete}
         />
         {error && <span className="text-rose-600 font-medium mt-2">{error.message}</span>}
     </>

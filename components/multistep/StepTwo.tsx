@@ -15,7 +15,7 @@ export const StepTwo = () => {
                 error={errors.email}
             />
             <FormField
-                type="text"
+                type="telephone"
                 placeholder="Phone"
                 name="phone"
                 register={register}

@@ -8,9 +8,9 @@ export default function Home() {
     <>
       {/* <ServiceWorker /> */}
       <MultiStepForm/>
-      <Link href="/blogs">Blogs</Link>
+      {/* <Link href="/blogs">Blogs</Link>
       <Link href="/about">About</Link>
-    <Input/>
+    <Input/> */}
     </>
   );
 }

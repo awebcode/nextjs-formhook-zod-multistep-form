@@ -1,7 +1,7 @@
-import type { Metadata,Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { StepProvider } from "@/hooks/providers/MultistepFormProvider";
+import { StepProvider } from "@/providers/MultistepFormProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

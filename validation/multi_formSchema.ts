@@ -2,7 +2,7 @@ import type { FieldError, UseFormRegister } from "react-hook-form";
 import * as z from "zod";
 
 export const stepOneSchema = z.object({
-  firstName: z.string().min(3, "First name is required").max(4, "First name is too long"),
+  firstName: z.string().min(3, "First name is required").max(10, "First name is too long"),
   lastName: z.string().min(1, "Last name is required"),
 });
 
