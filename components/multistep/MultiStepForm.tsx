@@ -1,12 +1,10 @@
 "use client"
 import React from 'react';
-import { useForm, FormProvider, useFormContext, type FieldError } from 'react-hook-form';
+import { useForm, FormProvider} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useStepContext } from '@/providers/MultistepFormProvider';
 import { stepOneSchema, stepTwoSchema, stepThreeSchema, type combined } from '@/validation/multi_formSchema';
-import { Card } from '../ui/card';
 import { Button } from '../ui/button';
-import FormField from './FormField';
 import { StepOne } from './Step1';
 import { StepTwo } from './StepTwo';
 import { StepThree } from './StepTheree';
@@ -17,16 +15,27 @@ const steps = [StepOne, StepTwo, StepThree]; // Array of step components
 const stepLabels = ['Step 1', 'Step 2', 'Step 3'];
 export const MultiStepForm = () => {
     const { currentStep, setCurrentStep, formData, setFormData } = useStepContext();
+    const [validationStatus, setValidationStatus] = React.useState<boolean[]>(Array(schemas.length).fill(false));
+
     const methods = useForm<combined>({
         resolver: zodResolver(schemas[currentStep]),
         defaultValues: formData,
         mode: 'all',
         reValidateMode: 'onChange',
         shouldFocusError: true,
-        progressive: true,
-
     });
-    const StepsComponent = steps[currentStep];
+
+
+   //*    When a single form will be valid then mark stepper as valid
+    React.useEffect(() => {
+        setValidationStatus(prevStatus => {
+            const newStatus = [...prevStatus];
+            newStatus[currentStep] = methods.formState.isValid;
+            return newStatus;
+        });
+    }, [methods.formState.isValid, currentStep]);
+
+  //> Submit form
     const onSubmit = (data: combined) => {
         setFormData({ ...formData, ...data });
 
@@ -37,6 +46,9 @@ export const MultiStepForm = () => {
         }
     };
 
+    //** */ Current step
+    const StepsComponent = steps[currentStep];
+    
     return (
         <div className='flex justify-between flex-wrap md:flex-nowrap gap-2 min-h-screen max-w-[900px] mx-auto'>
             {/* left */}
@@ -54,7 +66,7 @@ export const MultiStepForm = () => {
             </div>
             {/* right */}
             <div className="flex  justify-center flex-col items-center w-full ">
-                <Stepper steps={stepLabels} currentStep={currentStep} />
+                <Stepper validationStatus={validationStatus} steps={stepLabels} currentStep={currentStep} setcurrentStep={setCurrentStep} />
                 {/* Stepper */}
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} className='space-y-6 shadow-md rounded-md  w-auto md:min-w-[400px] md:max-w-md bg-white '>
@@ -62,10 +74,10 @@ export const MultiStepForm = () => {
                         {/* Display errors */}
                         <div className='w-full flex justify-between px-6 pb-2' >
 
-                            <Button size={"lg"} type="button" variant="outline" disabled={currentStep === 0} onClick={() => { if (currentStep > 0) setCurrentStep(currentStep - 1) }}>
+                            <Button size={"lg"} type="button" variant="outline" disabled={currentStep === 0 } onClick={() => { if (currentStep > 0) setCurrentStep(currentStep - 1) }}>
                                 Back
                             </Button>
-                            <Button type="submit" size={"lg"}>{methods.formState.isSubmitting ?<span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span>:""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
+                            <Button type="submit" disabled={!methods.formState.isValid&&currentStep===steps.length-1} size={"lg"}>{methods.formState.isSubmitting ?<span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span>:""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
                         </div>
                     </form>
                 </FormProvider>

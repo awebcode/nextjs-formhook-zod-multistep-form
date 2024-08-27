@@ -18,7 +18,7 @@ const FormField: React.FC<FormFieldProps> = ({
             {...register(name, { valueAsNumber })}
             autoComplete={autoComplete}
         />
-        {error && <span className="text-rose-600 font-medium mt-2">{error.message}</span>}
+        {error && <span className="text-rose-500 font-medium  pl-2">{error.message}</span>}
     </>
 );
 export default FormField;

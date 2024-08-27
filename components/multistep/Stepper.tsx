@@ -3,9 +3,11 @@ import React from 'react';
 interface StepperProps {
     steps: string[];
     currentStep: number;
+    setcurrentStep: (step: number) => void;
+    validationStatus: boolean[];
 }
 
-const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
+const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setcurrentStep, validationStatus }) => {
     return (
         <div className="flex flex-col items-center mb-8">
             {/* Current Step Indicator */}
@@ -14,17 +16,17 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
             </div>
 
             {/* Step Circles and Labels */}
-            <div className="flex items-center">
+            <div className="flex items-center gap-2 transition-all duration-300 ">
                 {steps.map((step, index) => (
-                    <div key={index} className="flex items-center">
+                    <div key={index} className="flex items-center cursor-pointer" onClick={() => setcurrentStep(index)}>
                         <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ease-in-out ${index <= currentStep ? 'bg-indigo-600 text-white' : 'bg-gray-300 text-gray-500'
+                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ease-in-out ${validationStatus[index] ? 'bg-indigo-600 text-white' : 'bg-gray-300 text-gray-500'
                                 }`}
                         >
-                            {index + 1}
+                            {validationStatus[index] ? <span className="text-white text-xl">✓</span> : index + 1}
                         </div>
                         <span
-                            className={`ml-2 transition-colors duration-300 ease-in-out ${index <= currentStep ? 'text-indigo-600' : 'text-gray-500'
+                            className={`ml-2 transition-colors duration-300 ease-in-out ${validationStatus[index] ? 'text-indigo-600 ' : 'text-gray-500'
                                 }`}
                         >
                             {step}
