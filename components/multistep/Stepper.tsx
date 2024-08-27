@@ -20,13 +20,13 @@ const Stepper: React.FC<StepperProps> = ({ steps, currentStep, setcurrentStep, v
                 {steps.map((step, index) => (
                     <div key={index} className="flex items-center cursor-pointer" onClick={() => setcurrentStep(index)}>
                         <div
-                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ease-in-out ${validationStatus[index] ? 'bg-violet-600 text-white' : 'bg-gray-300 text-gray-500'
+                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ease-in-out ${validationStatus[index] ? 'bg-violet-600 text-white' :currentStep === index?"bg-green-100 text-green-600": 'bg-gray-300 text-gray-500'
                                 }`}
                         >
                             {validationStatus[index] ? <span className="text-white text-xl">✓</span> : index + 1}
                         </div>
                         <span
-                            className={`ml-2 transition-colors duration-300 ease-in-out ${validationStatus[index] ? 'text-violet-600 ' : 'text-gray-500'
+                            className={`ml-2 transition-colors duration-300 ease-in-out ${validationStatus[index] ? 'text-violet-600 ' : currentStep === index ? "bg-green-100 text-green-600" : 'text-gray-500'
                                 }`}
                         >
                             {step}
