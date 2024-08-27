@@ -1,6 +1,6 @@
 import Input from "@/components/Input";
 import { MultiStepForm } from "@/components/multistep/MultiStepForm";
-import ServiceWorker from "@/components/worker/ServiceWorker";
+import ServiceWorker from "@/worker/ServiceWorker";
 import Link from "next/link";
 
 export default function Home() {

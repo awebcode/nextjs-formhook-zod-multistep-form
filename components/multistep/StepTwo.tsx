@@ -13,13 +13,15 @@ export const StepTwo = () => {
                 name="email"
                 register={register}
                 error={errors.email}
+                autoComplete="email"
             />
             <FormField
-                type="telephone"
+                type="tel"
                 placeholder="Phone"
                 name="phone"
                 register={register}
                 error={errors.phone}
+                autoComplete="tel"
             />
         </Card>
     );

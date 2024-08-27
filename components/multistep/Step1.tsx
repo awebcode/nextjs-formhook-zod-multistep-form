@@ -13,6 +13,7 @@ export const StepOne = () => {
                 name="firstName"
                 register={register}
                 error={errors.firstName}
+                autoComplete="given-name"
             />
             <FormField
                 type="text"
@@ -20,6 +21,7 @@ export const StepOne = () => {
                 name="lastName"
                 register={register}
                 error={errors.lastName}
+                autoComplete="family-name"
             />
         </Card>
     );

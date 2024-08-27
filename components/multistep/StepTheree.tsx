@@ -12,6 +12,7 @@ export const StepThree = () => {
                 name="password"
                 register={register}
                 error={errors.password}
+                autoComplete="new-password"
             />
             <FormField
                 type="password"
@@ -19,6 +20,8 @@ export const StepThree = () => {
                 name="confirmPassword"
                 register={register}
                 error={errors.confirmPassword}
+                autoComplete="new-password"
+
             />
         </Card>
     );

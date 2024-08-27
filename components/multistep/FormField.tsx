@@ -1,14 +1,14 @@
 import type { FormFieldProps } from "@/validation/multi_formSchema";
 import { Input } from "../ui/input";
 
-const FormField: React.FC<FormFieldProps&{autoComplete?: string}> = ({
+const FormField: React.FC<FormFieldProps> = ({
     type,
     placeholder,
     name,
     register,
     error,
     valueAsNumber,
-    autoComplete="on"
+    autoComplete
 }) => (
     <>
         <Input
