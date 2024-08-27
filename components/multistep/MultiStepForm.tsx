@@ -69,7 +69,7 @@ export const MultiStepForm = () => {
                 <Stepper validationStatus={validationStatus} steps={stepLabels} currentStep={currentStep} setcurrentStep={setCurrentStep} />
                 {/* Stepper */}
                 <FormProvider {...methods}>
-                    <form onSubmit={methods.handleSubmit(onSubmit)} className='space-y-6 shadow-md rounded-md  w-auto md:min-w-[400px] md:max-w-md bg-white '>
+                    <form onSubmit={methods.handleSubmit(onSubmit)} className='space-y-6 shadow-md rounded-md  w-auto md:min-w-[400px] md:max-w-md bg-white  backdrop-blur-lg'>
                         <StepsComponent />
                         {/* Display errors */}
                         <div className='w-full flex justify-between px-6 pb-2' >
