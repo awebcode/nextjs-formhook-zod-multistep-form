@@ -62,10 +62,10 @@ export const MultiStepForm = () => {
                         {/* Display errors */}
                         <div className='w-full flex justify-between px-6 pb-2' >
 
-                            <Button type="button" variant="outline" disabled={currentStep === 0} onClick={() => { if (currentStep > 0) setCurrentStep(currentStep - 1) }}>
+                            <Button size={"lg"} type="button" variant="outline" disabled={currentStep === 0} onClick={() => { if (currentStep > 0) setCurrentStep(currentStep - 1) }}>
                                 Back
                             </Button>
-                            <Button type="submit">{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
+                            <Button type="submit" size={"lg"}>{methods.formState.isSubmitting ?<span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span>:""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
                         </div>
                     </form>
                 </FormProvider>
