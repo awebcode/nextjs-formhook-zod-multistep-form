@@ -37,9 +37,9 @@ export const MultiStepForm = () => {
             return newStatus;
         });
         //**for real time setting data on context
-        setFormData(prev=>{...prev,...methods.getValues()});
+        setFormData({ ...formData, ...methods.getValues() });
         
-    }, [methods.formState.isValid, currentStep, formData, setFormData,methods]);
+    }, [methods.formState.isValid, currentStep,formData, setFormData,methods]);
 
     //> Submit form
     const onSubmit = (data: combined) => {
