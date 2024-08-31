@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import { useForm, FormProvider} from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useStepContext } from '@/providers/MultistepFormProvider';
 import { stepOneSchema, stepTwoSchema, stepThreeSchema, type combined } from '@/validation/multi_formSchema';
@@ -16,26 +16,31 @@ const stepLabels = ['Step 1', 'Step 2', 'Step 3'];
 export const MultiStepForm = () => {
     const { currentStep, setCurrentStep, formData, setFormData } = useStepContext();
     const [validationStatus, setValidationStatus] = React.useState<boolean[]>(Array(schemas.length).fill(false));
-
+    const [validationErrors, setValidationErrors] = React.useState<string[]>(Array(schemas.length).fill(''));
     const methods = useForm<combined>({
         resolver: zodResolver(schemas[currentStep]),
         defaultValues: formData,
-        mode: 'all',
+        mode: 'onTouched',
         reValidateMode: 'onChange',
         shouldFocusError: true,
+
+
+
     });
 
 
-   //*    When a single form will be valid then mark stepper as valid
+    //*    When a single form will be valid then mark stepper as valid
     React.useEffect(() => {
         setValidationStatus(prevStatus => {
             const newStatus = [...prevStatus];
             newStatus[currentStep] = methods.formState.isValid;
+
             return newStatus;
         });
+        
     }, [methods.formState.isValid, currentStep]);
 
-  //> Submit form
+    //> Submit form
     const onSubmit = (data: combined) => {
         setFormData({ ...formData, ...data });
 
@@ -48,7 +53,7 @@ export const MultiStepForm = () => {
 
     //** */ Current step
     const StepsComponent = steps[currentStep];
-    
+
     return (
         <div className='flex justify-between flex-wrap md:flex-nowrap gap-2 min-h-screen max-w-[900px] mx-auto'>
             {/* left */}
@@ -74,10 +79,12 @@ export const MultiStepForm = () => {
                         {/* Display errors */}
                         <div className='w-full flex justify-between px-6 pb-2' >
 
-                            <Button size={"lg"} type="button" variant="outline" disabled={currentStep === 0 } onClick={() => { if (currentStep > 0) setCurrentStep(currentStep - 1) }}>
+                            <Button size={"lg"} type="button" variant="outline" disabled={currentStep === 0} onClick={() => { if (currentStep > 0) setCurrentStep(currentStep - 1) }}>
                                 Back
                             </Button>
-                            <Button type="submit" disabled={!methods.formState.isValid&&currentStep===steps.length-1} size={"lg"}>{methods.formState.isSubmitting ?<span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span>:""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
+                            <Button type="submit"
+                                disabled={(!methods.formState.isValid || (!methods.formState.isDirty && currentStep !== 0)) || (Object.keys(methods.formState.errors).length > 0 && currentStep === schemas.length - 1)} size={"lg"}>
+                                {methods.formState.isSubmitting ? <span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span> : ""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
                         </div>
                     </form>
                 </FormProvider>

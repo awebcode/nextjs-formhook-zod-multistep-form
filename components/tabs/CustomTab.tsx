@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Define your content components
-const Cm1 = () => <div>Cm1</div>;
-const Cm2 = () => <div>Cm2</div>;
-const Cm3 = () => <div>Cm3</div>;
-const Cm4 = () => <div>Cm4</div>;
-const Cm5 = () => <div>Cm5</div>;
+const Cm1 = () => <div>(TAB 1)Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia velit non dolorem voluptatibus facere, excepturi enim quae rerum tempora quasi similique ea nostrum cupiditate nobis molestiae laudantium quod atque architecto.</div>;
+const Cm2 = () => <div>(TAB 2)Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia velit non dolorem voluptatibus facere, excepturi enim quae rerum tempora quasi similique ea nostrum cupiditate nobis molestiae laudantium quod atque architecto.</div>;
+const Cm3 = () => <div>(TAB 3)Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia velit non dolorem voluptatibus facere, excepturi enim quae rerum tempora quasi similique ea nostrum cupiditate nobis molestiae laudantium quod atque architecto.</div>;
+const Cm4 = () => <div>(TAB 4)Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia velit non dolorem voluptatibus facere, excepturi enim quae rerum tempora quasi similique ea nostrum cupiditate nobis molestiae laudantium quod atque architecto.</div>;
+const Cm5 = () => <div>(TAB 5)Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia velit non dolorem voluptatibus facere, excepturi enim quae rerum tempora quasi similique ea nostrum cupiditate nobis molestiae laudantium quod atque architecto.</div>;
 
 // Define your tabs with content components
 const tabs = [
@@ -47,7 +47,7 @@ const TabComponent = () => {
     }, [activeTab])
     return (
         <div className="w-full max-w-lg mx-auto mt-10">
-            <h1 className='text-2xl md:text-4xl rounded-sm selection:bg-orange-300 m-2 text-center bg-blue-100 text-blue-500 py-2'>Custom Tabs {activeTab+1 + "/" + tabs.length}</h1>
+            <h1 className='text-2xl md:text-3xl rounded-sm selection:bg-orange-300 m-4 text-center bg-blue-100 text-blue-500 p-2'>Custom Tabs {activeTab+1 + "/" + tabs.length}</h1>
             <div className="flex space-x-4 border-b-1 border-gray-100 ">
                 {tabs.map((tab, index) => (
                     <motion.button
@@ -77,7 +77,7 @@ const TabComponent = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                             transition={{ duration: 0.3 }}
-                            className="p-4 bg-gray-100 rounded-lg"
+                            className="p-4 bg-blue-100 tracking-wider leading-8 text-gray-500 rounded-lg"
                         >
                             {activeTabData}
                         </motion.div>
