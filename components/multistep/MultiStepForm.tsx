@@ -16,7 +16,6 @@ const stepLabels = ['Step 1', 'Step 2', 'Step 3'];
 export const MultiStepForm = () => {
     const { currentStep, setCurrentStep, formData, setFormData } = useStepContext();
     const [validationStatus, setValidationStatus] = React.useState<boolean[]>(Array(schemas.length).fill(false));
-    const [validationErrors, setValidationErrors] = React.useState<string[]>(Array(schemas.length).fill(''));
     const methods = useForm<combined>({
         resolver: zodResolver(schemas[currentStep]),
         defaultValues: formData,
@@ -37,12 +36,14 @@ export const MultiStepForm = () => {
 
             return newStatus;
         });
+        //**for real time setting data on context
+        // setFormData({ ...formData, ...methods.getValues() });
         
     }, [methods.formState.isValid, currentStep]);
 
     //> Submit form
     const onSubmit = (data: combined) => {
-        setFormData({ ...formData, ...data });
+        // setFormData({ ...formData, ...data });
 
         if (currentStep < schemas.length - 1) {
             setCurrentStep(currentStep + 1);
@@ -55,6 +56,7 @@ export const MultiStepForm = () => {
     const StepsComponent = steps[currentStep];
 
     return (
+        <FormProvider {...methods}>
         <div className='flex justify-between flex-wrap md:flex-nowrap gap-2 min-h-screen max-w-[900px] mx-auto'>
             {/* left */}
             <div className='grid place-items-center w-full'>
@@ -73,7 +75,7 @@ export const MultiStepForm = () => {
             <div className="flex  justify-center flex-col items-center w-full ">
                 <Stepper validationStatus={validationStatus} steps={stepLabels} currentStep={currentStep} setcurrentStep={setCurrentStep} />
                 {/* Stepper */}
-                <FormProvider {...methods}>
+              
                     <form onSubmit={methods.handleSubmit(onSubmit)} className='space-y-6 shadow-md rounded-md  w-auto md:min-w-[400px] md:max-w-md bg-white  backdrop-blur-lg'>
                         <StepsComponent />
                         {/* Display errors */}
@@ -87,14 +89,13 @@ export const MultiStepForm = () => {
                                 {methods.formState.isSubmitting ? <span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span> : ""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
                         </div>
                     </form>
-                </FormProvider>
             </div>
             {/* Final data */}
             <div className="grid place-items-center w-full text-emerald-500">
-                {formData && formData.firstName && (
+                {methods.getValues() && methods.getValues().firstName && (
                     <code>
                         {JSON.stringify(
-                            Object.assign({}, formData, { password: undefined, confirmPassword: undefined }),
+                            Object.assign({}, methods.getValues(), { password: undefined, confirmPassword: undefined }),
                             null,
                             1
                         )}
@@ -102,7 +103,9 @@ export const MultiStepForm = () => {
                 )}
             </div>
 
-        </div>
+            </div>
+        </FormProvider>
+
 
     );
 };
