@@ -1,13 +1,12 @@
-import Input from "@/components/Input";
 import { MultiStepForm } from "@/components/multistep/MultiStepForm";
-import ServiceWorker from "@/worker/ServiceWorker";
-import Link from "next/link";
+import TabComponent from "@/components/tabs/CustomTab";
 
 export default function Home() {
   return (
     <>
       {/* <ServiceWorker /> */}
-      <MultiStepForm/>
+      <MultiStepForm />
+      <TabComponent />
       {/* <Link href="/blogs">Blogs</Link>
       <Link href="/about">About</Link>
     <Input/> */}
