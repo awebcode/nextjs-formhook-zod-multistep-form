@@ -91,7 +91,7 @@ export const MultiStepForm = () => {
                     </form>
             </div>
             {/* Final data */}
-            <div className="grid place-items-center w-full text-emerald-500">
+            <div className="grid place-items-center w-full max-w-[300px] text-emerald-500">
                 {formData && formData.firstName && (
                     <code>
                         {JSON.stringify(
