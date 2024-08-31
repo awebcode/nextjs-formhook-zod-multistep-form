@@ -37,9 +37,9 @@ export const MultiStepForm = () => {
             return newStatus;
         });
         //**for real time setting data on context
-        // setFormData({ ...formData, ...methods.getValues() });
+        setFormData(prev=>{...prev,...methods.getValues()});
         
-    }, [methods.formState.isValid, currentStep]);
+    }, [methods.formState.isValid, currentStep, formData, setFormData,methods]);
 
     //> Submit form
     const onSubmit = (data: combined) => {
@@ -92,10 +92,10 @@ export const MultiStepForm = () => {
             </div>
             {/* Final data */}
             <div className="grid place-items-center w-full text-emerald-500">
-                {methods.getValues() && methods.getValues().firstName && (
+                {formData && formData.firstName && (
                     <code>
                         {JSON.stringify(
-                            Object.assign({}, methods.getValues(), { password: undefined, confirmPassword: undefined }),
+                            Object.assign({}, formData, { password: undefined, confirmPassword: undefined }),
                             null,
                             1
                         )}
