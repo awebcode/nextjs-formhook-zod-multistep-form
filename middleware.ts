@@ -6,7 +6,11 @@ import type { NextRequest } from "next/server";
 // Define the middleware function
 export function middleware(request: NextRequest) {
   // Check for login status (you'll need to adjust this based on your authentication method)
-    const token = request.cookies.get("authjs.session-token");
+    const token = request.cookies.get(
+      process.env.NODE_ENV === "production"
+        ? "__Secure-authjs.session-token"
+        : "authjs.session-token"
+    );
   
   // Define the URL of the login page
   const loginUrl = new URL("/login", request.url);

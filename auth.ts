@@ -6,11 +6,16 @@ import { prisma } from "@/prisma/prisma";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    Google({}),
-    Github({}),
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
+    Github({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
   ],
- pages: {
-   newUser: "/login",
- },
-  
+  pages: {
+    newUser: "/login",
+  },
 });
