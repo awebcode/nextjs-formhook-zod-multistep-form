@@ -1,8 +1,32 @@
-import withPWA from "@ducanh2912/next-pwa";
+import withPWAInit from "@ducanh2912/next-pwa";
 
-const nextConfig = withPWA({
-    dest: "public",
-    
+const withPWA = withPWAInit({
+  dest: "public",
 });
 
-export default nextConfig;
+export default withPWA({
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+    ],
+  },
+  // Your Next.js config
+});
+
+// const withPWA = require("@ducanh2912/next-pwa").default({
+//   dest: "public",
+// });
+
+// module.exports = withPWA({
+//     images: {
+//       remotePatterns: [
+//         {
+//           protocol: "https",
+//           hostname: "lh3.googleusercontent.com",
+//         },
+//       ],
+//     },
+// });

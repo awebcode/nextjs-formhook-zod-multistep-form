@@ -38,8 +38,8 @@ export const MultiStepForm = () => {
         });
         //**for real time setting data on context
         setFormData({ ...formData, ...methods.getValues() });
-        
-    }, [methods.formState.isValid, currentStep,formData, setFormData,methods]);
+
+    }, [methods.formState.isValid, currentStep]);
 
     //> Submit form
     const onSubmit = (data: combined) => {
@@ -57,25 +57,25 @@ export const MultiStepForm = () => {
 
     return (
         <FormProvider {...methods}>
-        <div className='flex justify-between flex-wrap md:flex-nowrap gap-2 min-h-screen max-w-[900px] mx-auto'>
-            {/* left */}
-            <div className='grid place-items-center w-full'>
-                {methods.formState.errors && (
-                    <p className="text-red-500">
+            <div className='flex justify-between flex-wrap md:flex-nowrap gap-2 min-h-screen max-w-[900px] mx-auto'>
+                {/* left */}
+                <div className='grid place-items-center w-full'>
+                    {methods.formState.errors && (
+                        <p className="text-red-500">
 
-                        {Object.entries(methods.formState.errors).map(([field, error]) => (
-                            <div key={field}>
-                                {field}: {error.message}
-                            </div>
-                        ))}
-                    </p>
-                )}
-            </div>
-            {/* right */}
-            <div className="flex  justify-center flex-col items-center w-full ">
-                <Stepper validationStatus={validationStatus} steps={stepLabels} currentStep={currentStep} setcurrentStep={setCurrentStep} />
-                {/* Stepper */}
-              
+                            {Object.entries(methods.formState.errors).map(([field, error]) => (
+                                <div key={field}>
+                                    {field}: {error.message}
+                                </div>
+                            ))}
+                        </p>
+                    )}
+                </div>
+                {/* right */}
+                <div className="flex  justify-center flex-col items-center w-full ">
+                    <Stepper validationStatus={validationStatus} steps={stepLabels} currentStep={currentStep} setcurrentStep={setCurrentStep} />
+                    {/* Stepper */}
+
                     <form onSubmit={methods.handleSubmit(onSubmit)} className='space-y-6 shadow-md rounded-md  w-auto md:min-w-[400px] md:max-w-md bg-white  backdrop-blur-lg'>
                         <StepsComponent />
                         {/* Display errors */}
@@ -89,19 +89,19 @@ export const MultiStepForm = () => {
                                 {methods.formState.isSubmitting ? <span className="w-5 h-5   animate-spin rounded-full  border-t-2 border-blue-600 "></span> : ""}{currentStep === schemas.length - 1 ? "Submit" : "Next"}</Button>
                         </div>
                     </form>
-            </div>
-            {/* Final data */}
-            <div className="grid place-items-center w-full max-w-[300px] text-emerald-500">
-                {formData && formData.firstName && (
-                    <code>
-                        {JSON.stringify(
-                            Object.assign({}, formData, { password: undefined, confirmPassword: undefined }),
-                            null,
-                            1
-                        )}
-                    </code>
-                )}
-            </div>
+                </div>
+                {/* Final data */}
+                <div className="grid place-items-center w-full max-w-[300px] text-emerald-500">
+                    {formData && formData.firstName && (
+                        <code>
+                            {JSON.stringify(
+                                Object.assign({}, formData, { password: undefined, confirmPassword: undefined }),
+                                null,
+                                1
+                            )}
+                        </code>
+                    )}
+                </div>
 
             </div>
         </FormProvider>

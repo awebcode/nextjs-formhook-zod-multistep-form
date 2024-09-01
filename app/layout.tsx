@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { StepProvider } from "@/providers/MultistepFormProvider";
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -41,9 +40,9 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: APP_DEFAULT_TITLE,
-    // startUpImage: [],
+    startupImage: [{ url: "/apple-touch-icon.png" }],
   },
   formatDetection: {
     telephone: false,
@@ -76,10 +75,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StepProvider>
-            {children}
+
+          <>   {children}</>
+
         </StepProvider>
       </body>
     </html>
