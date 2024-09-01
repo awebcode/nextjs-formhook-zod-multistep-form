@@ -69,7 +69,7 @@ const TabComponent = () => {
             </div>
 
             <div className="mt-4">
-                <AnimatePresence mode='wait'  >
+                <AnimatePresence mode='wait'>
                     {activeTabData && (
                         <motion.div
                             key={activeTab}
