@@ -11,10 +11,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Google({
       allowDangerousEmailAccountLinking: true,
+      clientId: process.env.AUTH_GOOGLE_ID as string,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET as string,
   
     }),
     Github({
       allowDangerousEmailAccountLinking: true,
+      clientId: process.env.AUTH_GITHUB_ID as string,
+      clientSecret: process.env.AUTH_GITHUB_SECRET as string,
     }),
     CredentialsProvider({
       id: "credentials",
