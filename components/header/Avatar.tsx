@@ -18,7 +18,7 @@ const Avatar = ({ session }: { session: Session | null }) => {
     return (
         <Menubar>
             <MenubarMenu>
-                <MenubarTrigger className="avatar bg-transparent border-none outline-none">{session?.user ? <Image width={50} height={50} className="rounded-full object-cover " src={session?.user?.image || "/vercel.svg"} alt="User Avatar" />:"Menu"}</MenubarTrigger>
+                <MenubarTrigger className="  border-none outline-none ">{session?.user ? <Image width={50} height={50} className="rounded-full object-cover w-full h-full" src={session?.user?.image || "/vercel.svg"} alt="User Avatar" />:"Menu"}</MenubarTrigger>
                 {session?.user ? <MenubarContent>
                     <MenubarItem>
                         Signed in as <MenubarShortcut>{session?.user?.name}</MenubarShortcut>

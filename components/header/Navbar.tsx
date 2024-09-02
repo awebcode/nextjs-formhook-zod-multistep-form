@@ -13,7 +13,7 @@ const Navbar = async() => {
                 <Link className="" href="/login">login</Link>
                 <Link className="" href="/user">user</Link>
             </ul>
-            <div><Avatar session={session}/></div>
+            <><Avatar session={session}/></>
         </div>
     )
 }
