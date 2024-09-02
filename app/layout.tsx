@@ -86,7 +86,7 @@ export default async function RootLayout({
         <StepProvider>
 
           <GoogleOAuthProvider clientId={process.env.AUTH_GOOGLE_ID!}>
-              {!session && <GoogleLoginPromp />}
+              {/* {!session && <GoogleLoginPromp />} */}
               
               <Navbar />  {children}
           
