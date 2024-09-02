@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
   const loginUrl = new URL("/login", request.url);
 
   // List of paths that do not require authentication
-  const publicPaths = ["/login", "/register", "/public"];
+  const publicPaths = ["/login", "/signup", "/public", "/email/verify", "/email/verify/**"];
 
   // Redirect to login page if not authenticated and the path is private
     if (!token?.value && !publicPaths.includes(request.nextUrl.pathname)) {

@@ -2,7 +2,11 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { StepProvider } from "@/providers/MultistepFormProvider";
+import GoogleOAuthProvider from "@/providers/GoogleOneTapProvider";
 import Navbar from "@/components/header/Navbar";
+import GoogleLoginPromp from "./(auth)/_components/GoogleLoginPromp";
+import { auth } from "@/auth";
+import  SessionProvider  from "@/providers/AuthJsProvider";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -70,17 +74,24 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StepProvider>
 
-          <> <Navbar/>  {children}</>
+          <GoogleOAuthProvider clientId={process.env.AUTH_GOOGLE_ID!}>
+              {!session && <GoogleLoginPromp />}
+              
+              <Navbar />  {children}
+          
+          </GoogleOAuthProvider>
+
 
         </StepProvider>
       </body>
