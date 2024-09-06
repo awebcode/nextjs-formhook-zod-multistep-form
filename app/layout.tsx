@@ -7,6 +7,7 @@ import Navbar from "@/components/header/Navbar";
 import GoogleLoginPromp from "./(auth)/_components/GoogleLoginPromp";
 import { auth } from "@/auth";
 import  SessionProvider  from "@/providers/AuthJsProvider";
+import NestedSidebar from "./_components/NestedSidebar";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -88,7 +89,9 @@ export default async function RootLayout({
           {/* <GoogleOAuthProvider clientId={process.env.AUTH_GOOGLE_ID!}> */}
               {/* {!session && <GoogleLoginPromp />} */}
               
-              <Navbar />  {children}
+          {/* <Navbar /> */}
+          <NestedSidebar/>
+          {children}
           
           {/* </GoogleOAuthProvider> */}
 

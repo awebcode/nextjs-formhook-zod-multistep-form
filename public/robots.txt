@@ -1,0 +1,20 @@
+# *
+User-agent: *
+Allow: /
+
+# test-bot
+User-agent: test-bot
+Allow: /path
+Allow: /path-2
+
+# black-listed-bot
+User-agent: black-listed-bot
+Disallow: /sub-path-1
+Disallow: /path-2
+
+# Host
+Host: https://nextjs-formhook-zod-multistep-form.vercel.app/
+
+# Sitemaps
+Sitemap: https://nextjs-formhook-zod-multistep-form.vercel.app/sitemap.xml
+Sitemap: https://nextjs-formhook-zod-multistep-form.vercel.app/my-custom-sitemap-1.xml
