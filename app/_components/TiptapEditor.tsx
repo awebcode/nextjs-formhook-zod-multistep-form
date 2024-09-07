@@ -14,7 +14,14 @@ import TiptapLink from '@tiptap/extension-link'
 import Highlight from '@tiptap/extension-highlight'
 import { Bold as BoldIcon, CodeIcon, Heading1Icon, Italic as ItalicIcon, Smile, ImageIcon, HighlighterIcon, Highlighter, Heading1, Heading2Icon, Heading3, Heading4, Heading6, Heading5 } from 'lucide-react'
 import { useRef, useState } from 'react'
-import EmojiPicker, { Theme } from 'emoji-picker-react';
+// Dynamically import the entire module
+const EmojiPicker = dynamic(
+    () => import('emoji-picker-react').then(mod => mod.default),
+    { ssr: false } // Disable server-side rendering for this component
+)
+
+
+
 import useClickOnOutside from '@/hooks/useClickOnOutside'
 import {
     Select,
@@ -25,6 +32,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import dynamic from 'next/dynamic'
 const Tiptap = () => {
     const [openEmoji, setOpenEmoji] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -106,7 +114,7 @@ const Tiptap = () => {
                 >
                     <Smile />
                     <div onClick={(e) => e.stopPropagation()} className="absolute top-10 right-0 md:left-0 z-50">
-                        {openEmoji && <EmojiPicker height={280} width={300} theme={Theme.AUTO} className='h-full w-full' lazyLoadEmojis onEmojiClick={(e) => { editor?.chain().focus().insertContent(e.emoji).run(); }} />}
+                        {openEmoji && <EmojiPicker height={280} width={300}  className='h-full w-full' lazyLoadEmojis onEmojiClick={(e) => { editor?.chain().focus().insertContent(e.emoji).run(); }} />}
                     </div>
                 </Button>
                 {/* Highlighter Button */}
