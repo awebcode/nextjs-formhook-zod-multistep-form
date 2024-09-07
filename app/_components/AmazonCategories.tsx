@@ -116,12 +116,13 @@ const AmazonCategoriesOrFacebookNavigation: React.FC = () => {
             )}
 
             {/* Category List */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                     key={history.length}
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}
                     exit={{ x: "-100%" }}
+                    
                     transition={{ type: "tween", duration: 0.2 }}
                     className="space-y-2"
                 >

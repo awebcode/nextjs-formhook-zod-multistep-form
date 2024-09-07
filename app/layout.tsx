@@ -9,6 +9,7 @@ import { auth } from "@/auth";
 import  SessionProvider  from "@/providers/AuthJsProvider";
 import NestedSidebar from "./_components/NestedSidebar";
 import AmazonCategories from "./_components/AmazonCategories";
+import Tiptap from "./_components/TiptapEditor";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -92,6 +93,7 @@ export default async function RootLayout({
               
           <Navbar />
           <AmazonCategories />
+          <Tiptap/>
           {/* <NestedSidebar/> */}
           {children}
           
